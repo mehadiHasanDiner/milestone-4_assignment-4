@@ -132,3 +132,19 @@ nav ul li a:hover, a.active{
     display: flex;
     justify-content: space-between;
 }
+
+#booking-area{
+    display: none;
+}
+
+.confrim-page{
+    height: 200px;
+    background-color: rgba(255, 255, 255, 0.432);
+    margin: 0 auto;
+    border-radius: 15px;
+}
+.confrim-page h1{
+    margin-top: 300px;
+    text-align: center;
+    color: rgb(46, 46, 46);
+}

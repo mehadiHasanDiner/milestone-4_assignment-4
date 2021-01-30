@@ -25,9 +25,15 @@
             </ul>
         </nav>
     </header>
+    
+    <div id="booking-area">
+        <div class="booking-content confrim-page">
+        <h1> Thanks for Booking Ticket <br> <hr> Ticket Total Price is : <span style="color: blueviolet;" id="priceOftotal"></span> </h1>
+        </div>
+    </div>
 
     <!--Booking Section-->
-    <main class="main-content container">
+    <main id="main-body" class="main-content container">
         <div class="booking-form">
             <h3>Booking Flights</h3>
             <div class="input-group">
@@ -97,7 +103,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn-style">Book Now</button>
+            <button id="booking" class="btn-style">Book Now</button>
         </div>
 
         <div class="booking-content">
@@ -107,9 +113,17 @@
                 voluptatibus quam</p>
         </div>
 
-
-
         <script>
+               // 
+        const bookingBtn = document.getElementById("booking");
+        bookingBtn.addEventListener("click", function () {
+            const bookingArea = document.getElementById("main-body");
+            bookingArea.style.display = "none";
+            const bookingConfirm = document.getElementById("booking-area");
+            bookingConfirm.style.display = "block";
+        })
+
+            // all functional work
             function handleTicketChange(tickeClass, isPlus) {
                 const classCount = getInputValue(tickeClass);
                 let classNewCount = 0
@@ -138,6 +152,7 @@
                 // calculate total
                 const grandTotal = subtotalPrice + tax;
                 document.getElementById('total').innerText = grandTotal;
+                document.getElementById('priceOftotal').innerText = grandTotal;
             }
 
             function getInputValue(tickeClass) {
@@ -147,9 +162,9 @@
             }
         </script>
 
-        </section>
+    </main>
 
-        <!--Thank You-->
+    <!--Thank You-->
 </body>
 
 </html>
