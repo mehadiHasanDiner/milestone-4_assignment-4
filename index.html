@@ -109,21 +109,46 @@
         <script>
             // First Class Ticket 
             document.getElementById('plus-FirstClass').addEventListener('click', function () {
-                const inputClass = document.getElementById('FirstClass-quantity');
-                const classCount = parseInt(inputClass.value);
-                const classNewCount = classCount + 1;
-                inputClass.value = classNewCount;
-
+                handleTicketChange(true);
             })
 
             // Economy Class Ticket 
             document.getElementById('minus-FirstClass').addEventListener('click', function () {
+                handleTicketChange(false);
+            })
+
+            function handleTicketChange(isPlus) {
                 const inputClass = document.getElementById('FirstClass-quantity');
                 const classCount = parseInt(inputClass.value);
-                const classNewCount = classCount - 1;
+                // const classNewCount = classCount - 1;
+                let classNewCount = 0
+                if (isPlus == true) {
+                    classNewCount = classCount + 1;
+                }
+                if (isPlus == false) {
+                    classNewCount = classCount - 1;
+                }
                 inputClass.value = classNewCount;
+            }
 
-            })
+
+            // // First Class Ticket 
+            // document.getElementById('plus-FirstClass').addEventListener('click', function () {
+            //     const inputClass = document.getElementById('FirstClass-quantity');
+            //     const classCount = parseInt(inputClass.value);
+            //     const classNewCount = classCount + 1;
+            //     inputClass.value = classNewCount;
+
+            // })
+
+            // // Economy Class Ticket 
+            // document.getElementById('minus-FirstClass').addEventListener('click', function () {
+            //     const inputClass = document.getElementById('FirstClass-quantity');
+            //     const classCount = parseInt(inputClass.value);
+            //     const classNewCount = classCount - 1;
+            //     inputClass.value = classNewCount;
+
+            // })
         </script>
 
         </section>
