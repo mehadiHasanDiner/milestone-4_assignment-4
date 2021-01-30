@@ -54,7 +54,7 @@
                     <input id="FirstClass-quantity" class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p><button id="plus-FirstClass">+</button> <button id="minus-FirstClass">-</button></p>
+                    <p><button onclick="handleTicketChange(true)">+</button> <button onclick="handleTicketChange(false)">-</button></p>
                 </div>
             </div>
 
@@ -106,17 +106,7 @@
         </div>
 
 
-        <script>
-            // First Class Ticket 
-            document.getElementById('plus-FirstClass').addEventListener('click', function () {
-                handleTicketChange(true);
-            })
-
-            // Economy Class Ticket 
-            document.getElementById('minus-FirstClass').addEventListener('click', function () {
-                handleTicketChange(false);
-            })
-
+        <script>            
             function handleTicketChange(isPlus) {
                 const inputClass = document.getElementById('FirstClass-quantity');
                 const classCount = parseInt(inputClass.value);
@@ -125,7 +115,7 @@
                 if (isPlus == true) {
                     classNewCount = classCount + 1;
                 }
-                if (isPlus == false) {
+                if (isPlus == false && classCount > 0) {
                     classNewCount = classCount - 1;
                 }
                 inputClass.value = classNewCount;
