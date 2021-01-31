@@ -84,7 +84,7 @@
                         <p>Charge 10% VAT</p>
                     </div>
                     <div class="right">
-                        <p id="economy-Class">$0</p>
+                        <p id="economy-Class">$ <span id="taxAmount">0</span> </p>
                     </div>
                 </div>
                 <hr>
@@ -93,7 +93,7 @@
                         <h4>Total</h4>
                     </div>
                     <div class="right">
-                        <p>$0</p>
+                        <p>$ <span id="total">0</span> </p>
                     </div>
                 </div>
             </div>
@@ -108,37 +108,36 @@
         </div>
 
 
+
         <script>
             function handleTicketChange(tickeClass, isPlus) {
-                const inputClass = document.getElementById(tickeClass + '-quantity');
-                // const subtotalPrice = document.getElementById('subtotal');
-
-                const classCount = parseInt(inputClass.value);
-                // const classNewCount = classCount - 1;
+                const classCount = getInputValue(tickeClass);
                 let classNewCount = 0
-                let ticketPrice = 0;
-
                 if (isPlus == true) {
                     classNewCount = classCount + 1;
-                    // ticketPrice = classNewCount * price;
                 }
                 if (isPlus == false && classCount > 0) {
                     classNewCount = classCount - 1;
-                    // ticketPrice = classNewCount * price
                 }
-                inputClass.value = classNewCount;
-                // subtotalPrice.innerText = ticketPrice;
-
+                document.getElementById(tickeClass + '-quantity').value = classNewCount;
                 calculateSubtotal();
-
             }
 
             function calculateSubtotal() {
+                // calculate subtotal
                 const firstClassCount = getInputValue('firstClass');
                 const economyClassCount = getInputValue('economyClass');
 
                 const subtotalPrice = firstClassCount * 150 + economyClassCount * 100;
                 document.getElementById('subtotal').innerText = subtotalPrice;
+
+                // calculate tax
+                const tax = Math.round(subtotalPrice * 0.1);
+                document.getElementById('taxAmount').innerText = tax;
+
+                // calculate total
+                const grandTotal = subtotalPrice + tax;
+                document.getElementById('total').innerText = grandTotal;
             }
 
             function getInputValue(tickeClass) {
@@ -146,102 +145,6 @@
                 const ticketClassCount = parseInt(ticketClassInput.value);
                 return ticketClassCount;
             }
-
-            // const subtotalPrice = document.getElementById('subtotal');
-
-// //
-
-// function handleTicketChange(isPlus) {
-//                 const inputClass = document.getElementById('FirstClass-quantity');
-//                 const subtotalPrice = document.getElementById('subtotal');
-
-//                 const classCount = parseInt(inputClass.value);
-//                 // const classNewCount = classCount - 1;
-//                 let classNewCount = 0
-//                 let ticketPrice = 0; 
-
-//                 if (isPlus == true) {
-//                     classNewCount = classCount + 1;
-//                     ticketPrice = classNewCount * price;
-//                 }
-//                 if (isPlus == false && classCount > 0) {
-//                     classNewCount = classCount - 1;
-//                     ticketPrice = classNewCount * price
-//                 }
-//                 inputClass.value = classNewCount;
-//                 subtotalPrice.innerText = ticketPrice;
-
-//             }
-
-
-
-// function handleTicketChange(isPlus, price) {
-//     const inputClass = document.getElementById('FirstClass-quantity');
-//     const subtotalUnitPrice = document.getElementById('subtotal');
-//     const inputClassEconomy = document.getElementById('EconomyClass-quantity');
-
-//     const classCount = parseInt(inputClass.value);
-//     const subtotalPrice150 = parseInt(subtotalUnitPrice.innerText);
-//     const subtotalPrice100 = parseInt(inputClassEconomy.innerText);
-//     // const classNewCount = classCount - 1;
-//     let classNewCount = 0
-//     let ticketPrice150 = 0; 
-//     let ticketPrice100 = 0; 
-
-//     if (isPlus == true) {
-//         classNewCount = classCount + 1;
-//         ticketPrice = classNewCount * price;
-//     }
-//     if (isPlus == false && classCount > 0) {
-//         classNewCount = classCount - 1;
-//         ticketPrice = classNewCount * price
-//     }
-//     inputClass.value = classNewCount;
-//     subtotalPrice150.innerText = ticketPrice150;
-//     subtotalPrice100.innerText = ticketPrice100;
-
-// }
-
-
-
-
-// function handleTicketChange(isPlus) {
-//                 const inputClass = document.getElementById('FirstClass-quantity');
-
-//                 const classCount = parseInt(inputClass.value);
-//                 // const classNewCount = classCount - 1;
-//                 let classNewCount = 0
-//                 if (isPlus == true) {
-//                     classNewCount = classCount + 1;
-//                 }
-//                 if (isPlus == false && classCount > 0) {
-//                     classNewCount = classCount - 1;
-//                 }
-//                 inputClass.value = classNewCount;
-
-//                 const ticketPrice = classNewCount * 150; 
-//                 document.getElementById('subtotal').innerText = ticketPrice;
-
-//             }
-
-
-            // // First Class Ticket 
-            // document.getElementById('plus-FirstClass').addEventListener('click', function () {
-            //     const inputClass = document.getElementById('FirstClass-quantity');
-            //     const classCount = parseInt(inputClass.value);
-            //     const classNewCount = classCount + 1;
-            //     inputClass.value = classNewCount;
-
-            // })
-
-            // // Economy Class Ticket 
-            // document.getElementById('minus-FirstClass').addEventListener('click', function () {
-            //     const inputClass = document.getElementById('FirstClass-quantity');
-            //     const classCount = parseInt(inputClass.value);
-            //     const classNewCount = classCount - 1;
-            //     inputClass.value = classNewCount;
-
-            // })
         </script>
 
         </section>
