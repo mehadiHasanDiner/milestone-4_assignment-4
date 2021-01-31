@@ -51,20 +51,22 @@
             <div class="input-group f-class">
                 <div>
                     <label for="">First Class ($150)</label>
-                    <input id="FirstClass-quantity" class="inp-style inp-width" type="text" name="" value="0">
+                    <input id="firstClass-quantity" class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p><button onclick="handleTicketChange(true)">+</button> <button onclick="handleTicketChange(false)">-</button></p>
+                    <p><button onclick="handleTicketChange('firstClass', true)">+</button> <button
+                            onclick="handleTicketChange('firstClass', false)">-</button></p>
                 </div>
             </div>
 
             <div class="input-group f-class">
                 <div>
                     <label for="">Economy ($100)</label>
-                    <input id="EconomyClass-quantity" class="inp-style inp-width" type="text" name="">
+                    <input id="economyClass-quantity" class="inp-style inp-width" type="text" name="" value="0">
                 </div>
                 <div class="plus-minus-btn">
-                    <p> <button id="plus-Economy">+</button> <button id="minus-Economy">-</button> </p>
+                    <p> <button onclick="handleTicketChange('economyClass', true)">+</button> <button
+                            onclick="handleTicketChange('economyClass', false)">-</button> </p>
                 </div>
             </div>
             <div class="calculations">
@@ -106,24 +108,121 @@
         </div>
 
 
-        <script>            
-            function handleTicketChange(isPlus) {
-                const inputClass = document.getElementById('FirstClass-quantity');
+        <script>
+            function handleTicketChange(tickeClass, isPlus) {
+                const inputClass = document.getElementById(tickeClass + '-quantity');
+                // const subtotalPrice = document.getElementById('subtotal');
+
                 const classCount = parseInt(inputClass.value);
                 // const classNewCount = classCount - 1;
                 let classNewCount = 0
+                let ticketPrice = 0;
+
                 if (isPlus == true) {
                     classNewCount = classCount + 1;
+                    // ticketPrice = classNewCount * price;
                 }
                 if (isPlus == false && classCount > 0) {
                     classNewCount = classCount - 1;
+                    // ticketPrice = classNewCount * price
                 }
                 inputClass.value = classNewCount;
-                
-                const ticketPrice = classNewCount * 150; 
-                document.getElementById('subtotal').innerText = ticketPrice;
+                // subtotalPrice.innerText = ticketPrice;
+
+                calculateSubtotal();
 
             }
+
+            function calculateSubtotal() {
+                const firstClassCount = getInputValue('firstClass');
+                const economyClassCount = getInputValue('economyClass');
+
+                const subtotalPrice = firstClassCount * 150 + economyClassCount * 100;
+                document.getElementById('subtotal').innerText = subtotalPrice;
+            }
+
+            function getInputValue(tickeClass) {
+                const ticketClassInput = document.getElementById(tickeClass + '-quantity');
+                const ticketClassCount = parseInt(ticketClassInput.value);
+                return ticketClassCount;
+            }
+
+            // const subtotalPrice = document.getElementById('subtotal');
+
+// //
+
+// function handleTicketChange(isPlus) {
+//                 const inputClass = document.getElementById('FirstClass-quantity');
+//                 const subtotalPrice = document.getElementById('subtotal');
+
+//                 const classCount = parseInt(inputClass.value);
+//                 // const classNewCount = classCount - 1;
+//                 let classNewCount = 0
+//                 let ticketPrice = 0; 
+
+//                 if (isPlus == true) {
+//                     classNewCount = classCount + 1;
+//                     ticketPrice = classNewCount * price;
+//                 }
+//                 if (isPlus == false && classCount > 0) {
+//                     classNewCount = classCount - 1;
+//                     ticketPrice = classNewCount * price
+//                 }
+//                 inputClass.value = classNewCount;
+//                 subtotalPrice.innerText = ticketPrice;
+
+//             }
+
+
+
+// function handleTicketChange(isPlus, price) {
+//     const inputClass = document.getElementById('FirstClass-quantity');
+//     const subtotalUnitPrice = document.getElementById('subtotal');
+//     const inputClassEconomy = document.getElementById('EconomyClass-quantity');
+
+//     const classCount = parseInt(inputClass.value);
+//     const subtotalPrice150 = parseInt(subtotalUnitPrice.innerText);
+//     const subtotalPrice100 = parseInt(inputClassEconomy.innerText);
+//     // const classNewCount = classCount - 1;
+//     let classNewCount = 0
+//     let ticketPrice150 = 0; 
+//     let ticketPrice100 = 0; 
+
+//     if (isPlus == true) {
+//         classNewCount = classCount + 1;
+//         ticketPrice = classNewCount * price;
+//     }
+//     if (isPlus == false && classCount > 0) {
+//         classNewCount = classCount - 1;
+//         ticketPrice = classNewCount * price
+//     }
+//     inputClass.value = classNewCount;
+//     subtotalPrice150.innerText = ticketPrice150;
+//     subtotalPrice100.innerText = ticketPrice100;
+
+// }
+
+
+
+
+// function handleTicketChange(isPlus) {
+//                 const inputClass = document.getElementById('FirstClass-quantity');
+
+//                 const classCount = parseInt(inputClass.value);
+//                 // const classNewCount = classCount - 1;
+//                 let classNewCount = 0
+//                 if (isPlus == true) {
+//                     classNewCount = classCount + 1;
+//                 }
+//                 if (isPlus == false && classCount > 0) {
+//                     classNewCount = classCount - 1;
+//                 }
+//                 inputClass.value = classNewCount;
+
+//                 const ticketPrice = classNewCount * 150; 
+//                 document.getElementById('subtotal').innerText = ticketPrice;
+
+//             }
 
 
             // // First Class Ticket 
